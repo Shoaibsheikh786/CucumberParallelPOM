@@ -84,7 +84,13 @@
 			<version>${junit-jupiter-api}</version>
 			<scope>test</scope>
 		</dependency>
-	
+
+
+		<dependency>
+			<groupId>tech.grasshopper</groupId>
+			<artifactId>extentreports-cucumber7-adapter</artifactId>
+			<version>1.14.0</version>
+		</dependency>
 
 
 	</dependencies>
@@ -130,7 +136,7 @@
 							<includes>
 								<!-- UNCOMMENT BELOW LINE - To execute feature
 								files with single runner -->
-								
+
 								<include>**/MyTestRunner.java</include>
 							</includes>
 							<!-- UNCOMMENT BELOW 3 LINES - To execute using

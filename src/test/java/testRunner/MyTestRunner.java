@@ -8,7 +8,8 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(
 		features=("src/test/resources/Features"),
-		glue={"applicationHooks","stepDefination"}
+		glue={"applicationHooks","stepDefination"},
+		plugin = {"com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:"}
 	) 
 		
 
