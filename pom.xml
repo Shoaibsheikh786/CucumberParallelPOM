@@ -26,6 +26,12 @@
 
 		<dependency>
 			<groupId>io.cucumber</groupId>
+			<artifactId>cucumber-testng</artifactId>
+			<version>7.16.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-jvm</artifactId>
 			<version>${cucumber.version}</version>
 			<type>pom</type>
@@ -142,7 +148,7 @@
 							<!-- UNCOMMENT BELOW 3 LINES - To execute using
 							parallel or combination option -->
 							<parallel>methods</parallel>
-							<threadCount>4</threadCount>
+							<threadCount>2</threadCount>
 							<perCoreThreadCount>true</perCoreThreadCount>
 
 						</configuration>
