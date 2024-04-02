@@ -18,10 +18,10 @@ Scenario: To check the we are able to login the application with the valid crede
 Given user is on the login page
 When user gives username "practice"
 And user given password "SuperSecretPassword!"
-Then user should be redirected to the dashboard "Test Automation Practice: Working with Secure Page"
+Then user should be redirected to the dashboard "2Test Automation Practice: Working with Secure Page"
 
 Scenario: To check we are not able to login with invalid credentials 
 Given user is on the login page
 When user gives username "xx1xxx"
 And user given password "1XXxXXX"
-Then user should be redirected to the dashboard "Test Automation Practice: Working with Login form"
+Then user should be redirected to the dashboard "1Test Automation Practice: Working with Login form"
