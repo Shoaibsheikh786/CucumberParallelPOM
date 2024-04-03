@@ -1,10 +1,10 @@
 -------------------------------------------------------------------------------
 Test set: TestSuite
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 28.46 s <<< FAILURE! - in TestSuite
-runScenario(parallel.ParallelRun)  Time elapsed: 18.97 s  <<< FAILURE!
+Tests run: 6, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 28.91 s <<< FAILURE! - in TestSuite
+runScenario(parallel.ParallelRun)  Time elapsed: 0.337 s  <<< FAILURE!
 java.lang.AssertionError
 
-runScenario(parallel.ParallelRun)  Time elapsed: 19.164 s  <<< FAILURE!
+runScenario(parallel.ParallelRun)  Time elapsed: 5.355 s  <<< FAILURE!
 java.lang.AssertionError
 

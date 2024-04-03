@@ -14,7 +14,6 @@ public class DriverFactory {
 		//	WebDriverManager.chromedriver().setup();
 			WebDriver driver=new ChromeDriver();
 			tDriver.set(driver);
-			System.out.println(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..");
 		}
 		else if(browser.equals("firefox"))
 		{
