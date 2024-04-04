@@ -7,11 +7,11 @@ jobs:
     steps:
       - checkout
 
-      # Install Chrome browser and WebDriver for Selenium tests
-      - run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
-      - run: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-      - run: sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
-      - run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+      # Install Chrome browser
+      - run: wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - run: sudo apt-get update && sudo apt-get install -y ./google-chrome-stable_current_amd64.deb
+
+      # Install WebDriver for Selenium tests
       - run: wget https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && sudo mv chromedriver /usr/local/bin/
 
       # Install Maven
