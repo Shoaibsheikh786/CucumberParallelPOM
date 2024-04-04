@@ -1,122 +1,27 @@
-version: 2
+version: 2.1
 
 jobs:
-
   build:
-
     docker:
-
-      # specify the version you desire here
-
-      - image: circleci/openjdk:8-jdk
-
-    working_directory: ~/circleCI_Selenium_Demo
-
-    environment:
-
-      # Customize the JVM maximum heap limit
-
-      MAVEN_OPTS: -Xmx3200m  
-
+      - image: circleci/openjdk:8-jdk  # Choose appropriate Java version
     steps:
-
       - checkout
 
-      # Download and cache dependencies
+      # Install Chrome browser and WebDriver for Selenium tests
+      - run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+      - run: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+      - run: sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+      - run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+      - run: wget https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && sudo mv chromedriver /usr/local/bin/
 
-
-      - restore_cache:
-
-          keys:
-
-          - v1-dependencies-{{ checksum "pom.xml" }}
-
-          # fallback to using the latest cache if no exact match is found
-
-          - v1-dependencies-
-
-
-      - run: mvn dependency:go-offline
-
-
-      - run:
-
-          name: Install latest version of ChromeDriver Sample
-
-          command: |
-
-            sudo wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-
-            sudo sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-
-            sudo apt-get update
-
-            sudo apt-get install google-chrome-unstable
-
-
-      - run:
-
-          name: Install latest version of ChromeDriver Sample
-
-          command: |
-
-            sudo wget https://chromedriver.storage.googleapis.com/2.31/chromedriver_linux64.zip
-
-            sudo unzip -o chromedriver_linux64.zip
-
-            sudo rm chromedriver_linux64.zip
-
-            sudo mv chromedriver /usr/bin/
-
-            sudo chmod 777 /usr/bin/chromedriver
-
-            sudo apt-get install libxi6 libgconf-2-4
-
-            sudo apt-get -y install xvfb gtk2-engines-pixbuf
-
-            sudo apt-get -y install xfonts-cyrillic xfonts-100dpi xfonts-75dpi xfonts-base xfonts-scalable
-
-            sudo apt-get install xvfb
-
-            sudo apt-get -y install imagemagick x11-apps
-   
-
-      - run:
-
-          name: Running X virtual framebuffer
-
-          command: Xvfb :0 -ac &
-
-
-      - run:
-
-          name: Run Tests
-
-          command: |
-
-            export DISPLAY=:99
-
-
-      - save_cache:
-
-          paths:
-
-            - ~/.m2
-
-          key: v1-dependencies-{{ checksum "pom.xml" }}
+      # Install Maven
+      - run: sudo apt-get install -y maven
       
+      # Run Maven build commands
+      - run: mvn clean test -Dsurefire.suiteXmlFiles=testng.xml  # Replace 'testng.xml' with the name of your TestNG XML file
 
-      # run tests!
-
-      - run: mvn clean test
-
-
-      - store_artifacts:
-
-          path: target/surefire-reports
-
-          destination: tr1
-
-      - store_test_results:
-
-          path: target/surefire-reports
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
