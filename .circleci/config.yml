@@ -18,7 +18,7 @@ jobs:
       - run: sudo apt-get install -y maven
       
       # Run Maven build commands
-      - run: mvn clean test -Dsurefire.suiteXmlFiles=testng.xml  # Replace 'testng.xml' with the name of your TestNG XML file
+      - run: mvn clean test  # This assumes that your TestNG tests are configured in your Maven POM file
 
 workflows:
   version: 2
