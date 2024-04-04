@@ -4,18 +4,21 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:8-jdk  # Choose appropriate Java version
-    working_directory: /app
     steps:
       - checkout
-      
+
+      # Install Chrome browser and WebDriver for Selenium tests
+      - run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+      - run: wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+      - run: sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+      - run: sudo apt-get update && sudo apt-get install -y google-chrome-stable
+      - run: wget https://chromedriver.storage.googleapis.com/89.0.4389.23/chromedriver_linux64.zip && unzip chromedriver_linux64.zip && sudo mv chromedriver /usr/local/bin/
+
       # Install Maven
       - run: sudo apt-get install -y maven
       
-      # Build the project
-      - run: mvn clean install -DskipTests=true
-      
-      # Run tests using TestNG
-      - run: mvn test -DtestngFile=testng.xml  # Replace 'testng.xml' with your testng.xml file name
+      # Run Maven build commands
+      - run: mvn clean test -Dsurefire.suiteXmlFiles=testng.xml  # Replace 'testng.xml' with the name of your TestNG XML file
 
 workflows:
   version: 2
