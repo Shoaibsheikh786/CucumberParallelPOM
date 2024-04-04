@@ -18,7 +18,7 @@ jobs:
       - run: sudo apt-get install -y maven
       
       # Run Maven build commands
-      - run: mvn clean test -e # This assumes that your TestNG tests are configured in your Maven POM file
+      - run: mvn clean test -X # This assumes that your TestNG tests are configured in your Maven POM file
 
 workflows:
   version: 2
