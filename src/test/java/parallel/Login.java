@@ -14,8 +14,10 @@ public class Login {
  
  private ConfigReader configReader=new ConfigReader();
   WebDriver driver;
- private LoginPage loginPage=new LoginPage(DriverFactory.getDriver());
-@Given("user is on the login page")
+
+  private LoginPage loginPage=new LoginPage(DriverFactory.getDriver());
+
+  @Given("user is on the login page")
 public void user_is_on_the_login_page() {
 	String url=configReader.init().getProperty("url");
 	driver= DriverFactory.getDriver();

@@ -1,0 +1,24 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/openjdk:8-jdk  # Choose appropriate Java version
+    working_directory: /app
+    steps:
+      - checkout
+      
+      # Install Maven
+      - run: sudo apt-get install -y maven
+      
+      # Build the project
+      - run: mvn clean install -DskipTests=true
+      
+      # Run tests using TestNG
+      - run: mvn test -DtestngFile=testng.xml  # Replace 'testng.xml' with your testng.xml file name
+
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build
